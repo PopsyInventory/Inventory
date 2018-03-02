@@ -55,6 +55,7 @@
             android:layout_gravity="fill"
             android:layout_row="1"
             android:layout_rowWeight="1"
+            android:onClick="toNewBottleActivity"
             android:text="add new &#10;bottle sizes" />
     </GridLayout>
 </RelativeLayout>
