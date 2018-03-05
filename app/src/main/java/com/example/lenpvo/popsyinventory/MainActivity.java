@@ -11,7 +11,11 @@ import android.view.View;
 import com.example.lenpvo.popsyinventory.InventoryActivity;
 import com.example.lenpvo.popsyinventory.R;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    public static ArrayList<String> bottles = new ArrayList<>();
 
     public void toInventoryActivity(View view){
         Intent intent = new Intent(getApplicationContext(),InventoryActivity.class);
@@ -20,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void toNewBottleActivity(View view){
         Intent intent = new Intent(getApplicationContext(),NewBottleActivity.class);
+        intent.putStringArrayListExtra("list1", bottles);
         startActivity(intent);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
 }
