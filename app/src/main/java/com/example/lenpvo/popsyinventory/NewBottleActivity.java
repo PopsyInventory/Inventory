@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import java.io.IOException;
@@ -30,20 +31,27 @@ public class NewBottleActivity extends AppCompatActivity {
                         myTF = (EditText) findViewById(R.id.newtf);
                         //Log.i("info",myTF.getText().toString());
                         Intent i = getIntent();
-                        ArrayList<String> BottlesList = i.getStringArrayListExtra("list1");
-                        BottlesList.add(myTF.getText().toString());
-                        try {
-                            sharedPreferences.edit().putString("bottleslist",ObjectSerializer.serialize(BottlesList)).apply();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        ArrayList<String> newBottlesList = new ArrayList<>();
+                        ArrayList<String> newBottlesList = i.getStringArrayListExtra("list2");
+                        Log.i("newBottlesList1",newBottlesList.toString());
                         try {
                             newBottlesList = (ArrayList) ObjectSerializer.deserialize(sharedPreferences.getString("bottleslist",ObjectSerializer.serialize(new ArrayList<String>())));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        Log.i("newBottlesList",newBottlesList.toString());
+                        //ArrayList<String> BottlesList = i.getStringArrayListExtra("list1");
+                        newBottlesList.add(myTF.getText().toString());
+                        //static ArrayList<String> exlist = new ArrayList<>();
+                        //exlist.add("monica");
+                        //exlist.add("chandler");
+                        try {
+                            sharedPreferences.edit().putString("bottleslist",ObjectSerializer.serialize(newBottlesList)).apply();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        //Intent intent = new Intent(getApplicationContext(),InventoryActivity.class);
+                        //intent.putStringArrayListExtra("list2", newBottlesList);
+                        Log.i("newBottlesList2",newBottlesList.toString());
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -68,7 +76,7 @@ public class NewBottleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_bottle);
-        ArrayList newBottlesList = MainActivity.bottles;
+        //ArrayList newBottlesList = MainActivity.bottles;
         /*SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.lenpvo.popsyinventory", Context.MODE_PRIVATE);
         sharedPreferences.edit().putString("newBottle","chorus500ml").apply();
         String bottle = sharedPreferences.getString("newBottle","");

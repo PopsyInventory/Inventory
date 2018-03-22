@@ -15,16 +15,20 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static ArrayList<String> bottles = new ArrayList<>();
+    //public static ArrayList<String> bottles = new ArrayList<>();
+    public static ArrayList<String> newbottles = new ArrayList<>();
 
     public void toInventoryActivity(View view){
         Intent intent = new Intent(getApplicationContext(),InventoryActivity.class);
+    //    intent.putStringArrayListExtra("list1", bottles);
+        intent.putStringArrayListExtra("list2", newbottles);
         startActivity(intent);
     }
 
     public void toNewBottleActivity(View view){
         Intent intent = new Intent(getApplicationContext(),NewBottleActivity.class);
-        intent.putStringArrayListExtra("list1", bottles);
+    //    intent.putStringArrayListExtra("list1", bottles);
+        intent.putStringArrayListExtra("list2", newbottles);
         startActivity(intent);
     }
 
