@@ -11,15 +11,29 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class NewBottleActivity extends AppCompatActivity {
 
+    DatabaseHelper myDb;
+
+    public void insertInDatabase(String str){
+
+        int i = 0;
+        boolean isInserted = myDb.insertData(str,i);
+        if(isInserted)
+            Log.i("infomata","Data inserted");
+        else
+            Log.i("infomata","Data not inserted");
+
+    }
+
     public void clickFunc(View view){
 
-        final SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.lenpvo.popsyinventory", Context.MODE_PRIVATE);
+        //final SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.lenpvo.popsyinventory", Context.MODE_PRIVATE);
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
@@ -29,8 +43,12 @@ public class NewBottleActivity extends AppCompatActivity {
                         //Yes button clicked
                         EditText myTF;
                         myTF = (EditText) findViewById(R.id.newtf);
+
+                        //db.execSQL("INSERT INTO bottles (name,count) VALUES ('chorus',500)");
+                        insertInDatabase(myTF.getText().toString());
+
                         //Log.i("info",myTF.getText().toString());
-                        Intent i = getIntent();
+        /*                Intent i = getIntent();
                         ArrayList<String> newBottlesList = i.getStringArrayListExtra("list2");
                         Log.i("newBottlesList1",newBottlesList.toString());
                         try {
@@ -52,6 +70,7 @@ public class NewBottleActivity extends AppCompatActivity {
                         //Intent intent = new Intent(getApplicationContext(),InventoryActivity.class);
                         //intent.putStringArrayListExtra("list2", newBottlesList);
                         Log.i("newBottlesList2",newBottlesList.toString());
+        */
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -76,6 +95,7 @@ public class NewBottleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_bottle);
+        myDb = new DatabaseHelper(this);
         //ArrayList newBottlesList = MainActivity.bottles;
         /*SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.lenpvo.popsyinventory", Context.MODE_PRIVATE);
         sharedPreferences.edit().putString("newBottle","chorus500ml").apply();

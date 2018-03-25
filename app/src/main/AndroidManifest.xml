@@ -17,8 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".InventoryActivity" />
-        <activity android:name=".NewBottleActivity"/>
-
+        <activity android:name=".NewBottleActivity" />
+        <activity
+            android:name=".UpdateActivity"
+            android:label="@string/title_activity_update"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
