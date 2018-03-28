@@ -89,6 +89,7 @@ public class InventoryActivity extends AppCompatActivity {
         ListView myList = (ListView) findViewById(R.id.lvId);
         myList.setAdapter(myCursorAdapter);
 
+
         //int[] toViewIDs = new int[] {R.id.textViewItemNumber,}
     /*    ArrayList<String> listData = new ArrayList<>();
         while(res.moveToNext()){

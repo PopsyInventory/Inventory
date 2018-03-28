@@ -21,7 +21,6 @@ public class NewBottleActivity extends AppCompatActivity {
     DatabaseHelper myDb;
 
     public void insertInDatabase(String str){
-
         int i = 0;
         boolean isInserted = myDb.insertData(str,i);
         if(isInserted)
@@ -46,6 +45,7 @@ public class NewBottleActivity extends AppCompatActivity {
 
                         //db.execSQL("INSERT INTO bottles (name,count) VALUES ('chorus',500)");
                         insertInDatabase(myTF.getText().toString());
+                        myTF.setText("");
 
                         //Log.i("info",myTF.getText().toString());
         /*                Intent i = getIntent();

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.design.widget.TabLayout;
 import android.util.Log;
 
 /**
@@ -23,7 +24,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_2 = "btlcount";
 
     public DatabaseHelper(Context context) {
-        super(context, Table_Name, null, 1);
+        super(context, Database_Name, null, 2);
+        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     public class dbColumns{
@@ -34,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE IF NOT EXISTS btltable (_id INT(3),btlname VARCHAR, btlcount INT(7))";
+        String createTable = " CREATE TABLE "+Table_Name+" ("+COL_0+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COL_1+" VARCHAR, "+COL_2+" INTEGER)";
         db.execSQL(createTable);
 
     }
@@ -65,9 +67,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    /*public String getCount(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String count = db.rawQuery("SELECT count FROM "+Table_Name+"WHERE _id = id");
+        return count;
+    }*/
+
     public void dropTable(String tablename){
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("DROP TABLE IF EXISTS "+tablename);
         Log.i("infomata","table deleted");
+    }
+
+    public boolean updateData(String id,String name, String count){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_0,id);
+        contentValues.put(COL_1,name);
+        contentValues.put(COL_2,count);
+        db.update(Table_Name,contentValues,"_id = ?", new String[]{ id });
+        return true;
+    }
+
+    public void updateCount(Long id, int value){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE "+Table_Name+" SET "+COL_2+" = "+COL_2+" + "+value+" WHERE _id = "+id);
+    }
+
+    public void updateCountSubtract(Long id,int value){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            db.execSQL("UPDATE " + Table_Name + " SET " + COL_2 + " = " + COL_2 + " - " + value + " WHERE _id = " + id);
+
+            }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

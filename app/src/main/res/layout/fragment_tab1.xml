@@ -1,13 +1,48 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.lenpvo.popsyinventory.Tab1Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/btbsubtracted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="@string/select_bottle"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/addbuttonid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/countbtbadded"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:text="update" />
+
+
+    <Spinner
+        android:id="@+id/spinneradd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/btbsubtracted"
+        android:layout_marginTop="54dp"></Spinner>
+
+    <EditText
+        android:id="@+id/countbtbadded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinneradd"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Quantity"
+        android:inputType="number"
+        android:textSize="20dp" />
+
+</RelativeLayout>
