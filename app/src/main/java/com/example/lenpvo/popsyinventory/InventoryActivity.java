@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,9 +26,9 @@ public class InventoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
         myDb = new DatabaseHelper(this);
-
-        Intent i = getIntent();
-
+        TextView tvName = (TextView)findViewById(R.id.totalcountid);
+        int amount = myDb.getTotalCount();
+        tvName.setText(String.valueOf(amount));
         populateListView();
     }
 

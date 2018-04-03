@@ -3,10 +3,8 @@ package com.example.lenpvo.popsyinventory;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.design.widget.TabLayout;
 import android.util.Log;
 
 /**
@@ -125,6 +123,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + Table2_Name+ " ORDER BY "+COL2_3+" DESC", null);
         return c;
+    }
+
+    public int getTotalCount(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String str = "SELECT SUM("+COL_2+") FROM "+Table_Name;
+        Cursor cur = db.rawQuery(str,null);
+        if(cur.moveToFirst())
+        {
+            return cur.getInt(0);
+        }
+        return 0;
     }
 
     public void dropTable(String tablename){
