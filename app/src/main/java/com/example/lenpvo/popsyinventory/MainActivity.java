@@ -22,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
     //SQLiteDatabase db;
     public static ArrayList<String> newbottles = new ArrayList<>();
 
+    public void toTransactionsActivity(View view){
+        Intent intent = new Intent(getApplicationContext(),TransactionsActivity.class);
+        startActivity(intent);
+    }
+
     public void toUpdateActivity(View view){
         Intent intent = new Intent(getApplicationContext(),UpdateActivity.class);
         startActivity(intent);
